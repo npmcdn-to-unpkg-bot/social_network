@@ -1,0 +1,21 @@
+{
+  "name": "social_network",
+  "version": "1.0.0",
+  "description": "A simple facebook-life social network.",
+  "main": "server.js",
+  "keywords": [
+    "SocialNetwork",
+    "Facebook"
+  ],
+  "author": "Joren Heyman (Geekster101)",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "latest",
+    "koa-views": "latest",
+    "koa-router": "latest",
+    "koa-static": "latest",
+    "socket.io": "latest",
+    "pug": "latest",
+    "mongoose": "latest"
+  }
+}
