@@ -10,8 +10,8 @@ import * as http from 'http';
 export function setupApp(): Koa {
     let app = new Koa();
     app.use(views('../client/views', { extension: 'pug' }));
-    app.use(serve('../client/node_modules'));
     app.use(serve('../client/public'));
+    app.use(serve('../client/node_modules'));
 
     return app;
 }
