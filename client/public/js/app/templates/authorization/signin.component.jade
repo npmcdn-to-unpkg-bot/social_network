@@ -1,0 +1,14 @@
+div.container
+    form((ngSubmit)='login()')
+        div.form
+            h2 Enter Your Login Info
+            //h2.error(*ngIf='error === true') Please fill in all the fields!
+            div.alert.alert-danger.alert-dismissible(role='alert', *ngIf='error === true')
+                button.close(type='button', data-dismiss='alert', aria-label='Close')
+                    span(aria-hidden=true) &times;
+                p Please fill in all the fields!
+
+            input.form-control(type='email', placeholder='Email', [(ngModel)]='email', name='email')
+            input.form-control(type='password', placeholder='Password', [(ngModel)]='password', name='password')
+
+            input.btn.btn-primary(type='submit', value='Sign In')

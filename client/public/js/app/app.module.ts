@@ -5,6 +5,8 @@ import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {HomeComponent} from "./components/home.component";
 import {routing} from "./app.routing";
+import {SigninComponent} from "./components/authorization/signin.component";
+import {ApiService} from "./services/api.service";
 
 @NgModule({
     imports: [
@@ -14,11 +16,12 @@ import {routing} from "./app.routing";
         routing
     ],
     providers: [
-
+        ApiService
     ],
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        SigninComponent
     ],
     bootstrap: [
         AppComponent
