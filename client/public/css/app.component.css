@@ -8,3 +8,7 @@
   width: 20px;
   border-radius: 2px;
 }
+.navbar-default .avatar {
+  width: 20px;
+  border-radius: 100%;
+}

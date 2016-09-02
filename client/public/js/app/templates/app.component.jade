@@ -1,9 +1,9 @@
 nav.navbar.navbar-default
     div.container-fluid
         div.navbar-header
-            button.navbar-toggle.collapsed(type='button', data-toggle='collapsed',
-                data-target='#bs-example-navbar-collapse-1', aria-expanded=false)
-                span.sr-only Toggle Navigation
+            button(type='button', class='navbar-toggle collapsed', data-toggle='collapse',
+            data-target='#bs-example-navbar-collapse-1', aria-expanded=false)
+                span.sr-only Toggle navigation
                 span.icon-bar
                 span.icon-bar
                 span.icon-bar
@@ -15,6 +15,17 @@ nav.navbar.navbar-default
                 li: a(routerLink='home', routerLinkActive='active') Home
 
             ul.nav.navbar-nav.navbar-right
+                //li: a(routerLink='account', routerLinkActive='active'): img.avatar(src='/img/default-avatar.png')
+                li.dropdown
+                    a.dropdown-toggle(type='button', id='menu1', data-toggle='dropdown')
+                        img.avatar(src='/img/default-avatar.png')
+                        span.caret
+                    ul.dropdown-menu(role='menu', aria-labelledby='menu1')
+                        li(role='presentation'): a(role='menuitem', tabindex='-1', routerLink='account',
+                                                    routerLinkActive='active') Account
+                        li.divider
+                        li(role='presentation'): a(role='menuitem', tabindex='-1', routerLink='account',
+                                                    routerLinkActive='active') Sign Out
                 li: a(routerLink='signin', routerLinkActive='active') Sign In
                 li: a(routerLink='signup', routerLinkActive='active') Sign Up
 router-outlet
