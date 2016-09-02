@@ -15,4 +15,8 @@ export function route(app) {
     router.get('/', async function(ctx) {
         await ctx.render('index');
     });
+
+    router.get(/.*/, async function(ctx) {
+        await ctx.render('index');
+    })
 }

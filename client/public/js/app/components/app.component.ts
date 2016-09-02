@@ -6,6 +6,7 @@ import {Component} from "@angular/core";
  */
 @Component({
     selector: 'socialnetwork',
-    template: '<h1>App</h1>'
+    styleUrls: ['../../../css/app.component.css'],
+    templateUrl: '/js/app/templates/app.component.html'
 })
 export class AppComponent {}

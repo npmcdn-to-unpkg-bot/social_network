@@ -8,19 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 // Imports
 var core_1 = require("@angular/core");
 /**
- * Component that will contain the header with all the links.
+ * Component that will display the home page
  */
-var AppComponent = (function () {
-    function AppComponent() {
+var HomeComponent = (function () {
+    function HomeComponent() {
     }
-    AppComponent = __decorate([
+    HomeComponent = __decorate([
         core_1.Component({
-            selector: 'socialnetwork',
-            styleUrls: ['../../../css/app.component.css'],
-            templateUrl: '/js/app/templates/app.component.html'
+            template: '<h1>Home</h1>'
         })
-    ], AppComponent);
-    return AppComponent;
+    ], HomeComponent);
+    return HomeComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.HomeComponent = HomeComponent;
+//# sourceMappingURL=home.component.js.map

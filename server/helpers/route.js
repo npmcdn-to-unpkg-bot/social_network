@@ -23,6 +23,11 @@ function route(app) {
             yield ctx.render('index');
         });
     });
+    router.get(/.*/, function (ctx) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield ctx.render('index');
+        });
+    });
 }
 exports.route = route;
 //# sourceMappingURL=route.js.map
