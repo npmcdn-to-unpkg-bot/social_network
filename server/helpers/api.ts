@@ -1,6 +1,7 @@
 import {User} from '../models/user';
 import * as mongoose from 'mongoose';
 import * as jwt from 'jwt-simple';
+import * as crypto from 'crypto';
 
 mongoose.connect('mongodb://192.168.0.228:27017/socialnetwork'); // Connecting to mongodb database
 

@@ -7,6 +7,7 @@ import {HomeComponent} from "./components/home.component";
 import {routing} from "./app.routing";
 import {SigninComponent} from "./components/authorization/signin.component";
 import {ApiService} from "./services/api.service";
+import {LoggedinGuard} from "./guards/loggedin.guard";
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import {ApiService} from "./services/api.service";
         routing
     ],
     providers: [
-        ApiService
+        ApiService,
+        LoggedinGuard
     ],
     declarations: [
         AppComponent,

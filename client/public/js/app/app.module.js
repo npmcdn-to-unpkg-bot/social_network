@@ -14,6 +14,7 @@ var home_component_1 = require("./components/home.component");
 var app_routing_1 = require("./app.routing");
 var signin_component_1 = require("./components/authorization/signin.component");
 var api_service_1 = require("./services/api.service");
+var loggedin_guard_1 = require("./guards/loggedin.guard");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -26,7 +27,8 @@ var AppModule = (function () {
                 app_routing_1.routing
             ],
             providers: [
-                api_service_1.ApiService
+                api_service_1.ApiService,
+                loggedin_guard_1.LoggedinGuard
             ],
             declarations: [
                 app_component_1.AppComponent,
