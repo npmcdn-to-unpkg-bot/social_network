@@ -28,4 +28,14 @@ export class ApiService {
     post(url, body) {
         return this.http.post(url, body).map(res => res.json()).toPromise();
     }
+
+    /**
+     * Function that returns a JSON object with the information of the currently signed in user
+     */
+    getUserInfo() {
+        let item = window.localStorage.getItem('Token');
+        let payload = item.split('.')[1];
+
+        return btoa(payload);
+    }
 }

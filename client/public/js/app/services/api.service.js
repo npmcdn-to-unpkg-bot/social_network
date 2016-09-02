@@ -36,6 +36,14 @@ var ApiService = (function () {
     ApiService.prototype.post = function (url, body) {
         return this.http.post(url, body).map(function (res) { return res.json(); }).toPromise();
     };
+    /**
+     * Function that returns a JSON object with the information of the currently signed in user
+     */
+    ApiService.prototype.getUserInfo = function () {
+        var item = window.localStorage.getItem('Token');
+        var payload = item.split('.')[1];
+        return btoa(payload);
+    };
     ApiService = __decorate([
         core_1.Injectable(),
         __param(0, core_1.Inject(http_1.Http))

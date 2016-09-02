@@ -8,6 +8,7 @@ import {routing} from "./app.routing";
 import {SigninComponent} from "./components/authorization/signin.component";
 import {ApiService} from "./services/api.service";
 import {LoggedinGuard} from "./guards/loggedin.guard";
+import {SignupComponent} from "./components/authorization/signup.component";
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import {LoggedinGuard} from "./guards/loggedin.guard";
     declarations: [
         AppComponent,
         HomeComponent,
-        SigninComponent
+        SigninComponent,
+        SignupComponent
     ],
     bootstrap: [
         AppComponent

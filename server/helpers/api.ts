@@ -9,11 +9,12 @@ export function api(router) {
     router.post('/api/login', async function(ctx) {
         var email = ctx.request.body.email;
         var password = ctx.request.body.password;
+        var hashedPassword = crypto.createHash('md5').update(password).digest('hex');
 
         var user = await User.findOne({ email: email });
 
         if (user) {
-            if (user.password == password) {
+            if (user.password == hashedPassword) {
                 var payload = {
                     iat: new Date().getTime() / 1000,
                     exp: (new Date().getTime() / 1000) + 60 * 60 * 24 * 30,
@@ -27,9 +28,36 @@ export function api(router) {
                 return;
             } else {
                 ctx.body = { error: 'Invalid Credentials!' };
-                ctx.status = 400;
                 return;
             }
+        } else {
+            ctx.body = { error: 'Invalid Credentials!' };
+            return;
+        }
+    });
+
+    router.post('/api/register', async function(ctx) {
+        var firstName = ctx.request.body.firstName;
+        var lastName = ctx.request.body.lastName;
+        var email = ctx.request.body.email;
+        var password = ctx.request.body.password;
+        var hashedPassword = crypto.createHash('md5').update(password).digest('hex');
+
+        let user = await User.find({ email: email });
+
+        if (!user.length) {
+            var newUser = new User({
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: hashedPassword
+            });
+            await newUser.save();
+            ctx.body = { success: true };
+            return;
+        } else {
+            ctx.body = { error: true };
+            return;
         }
     });
 }

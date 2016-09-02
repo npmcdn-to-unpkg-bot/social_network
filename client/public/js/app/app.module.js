@@ -15,6 +15,7 @@ var app_routing_1 = require("./app.routing");
 var signin_component_1 = require("./components/authorization/signin.component");
 var api_service_1 = require("./services/api.service");
 var loggedin_guard_1 = require("./guards/loggedin.guard");
+var signup_component_1 = require("./components/authorization/signup.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -33,7 +34,8 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 home_component_1.HomeComponent,
-                signin_component_1.SigninComponent
+                signin_component_1.SigninComponent,
+                signup_component_1.SignupComponent
             ],
             bootstrap: [
                 app_component_1.AppComponent

@@ -1,5 +1,6 @@
 import {Component, Inject} from "@angular/core";
 import {ApiService} from "../../services/api.service";
+import {Router} from "@angular/router";
 
 @Component({
     templateUrl: '/js/app/templates/authorization/signin.component.html',
@@ -9,8 +10,9 @@ export class SigninComponent {
     private email: string;
     private password: string;
     private error: boolean;
+    private errorMessage: string;
 
-    constructor(@Inject(ApiService)private api: ApiService) {
+    constructor(@Inject(ApiService)private api: ApiService, @Inject(Router)private router: Router) {
         this.error = false;
     }
 
@@ -25,7 +27,10 @@ export class SigninComponent {
                 password: this.password
             }).then(res => {
                 if (res.token) {
+                    this.router.navigate(['/home']);
                     window.localStorage.setItem("Token", res.token);
+                } else if (res.error) {
+                    this.error = true;
                 }
             });
         } else {
