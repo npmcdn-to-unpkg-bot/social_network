@@ -23,6 +23,10 @@ var SigninComponent = (function () {
             this.api.post('http://192.168.0.228:3000/api/login', {
                 email: this.email,
                 password: this.password
+            }).then(function (res) {
+                if (res.token) {
+                    window.localStorage.setItem("Token", res.token);
+                }
             });
         }
         else {
