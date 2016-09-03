@@ -4,3 +4,8 @@ div.container
         img.profile-img([src]='user?.image').col-xs-12.col-md-4.col-sm-4
         h4.col-md-7.col-xs-12.col-sm-7 Full Name: {{ user?.firstName + ' ' + user?.lastName }}
         h4.col-md-7.col-xs-12.col-sm-7 User Bio: {{ user?.biography }}
+
+        h2.col-md-12.col-xs-12.col-sm-12 Friends:
+
+        div.friends(*ngFor='let friend of friends').col-md-12.col-xs-12.col-sm-12
+            h4: a((click)='gotoFriend(friend?._id)') {{ friend?.firstName }}

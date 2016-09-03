@@ -18,6 +18,17 @@ function api(router) {
             ctx.body = yield user_1.User.findOne({ _id: ctx.params.id });
         });
     });
+    router.get('/api/user/:id/friends', function (ctx) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var user = yield user_1.User.findOne({ _id: ctx.params.id });
+            var friends = [];
+            for (var i = 0; i < user.friends.length; i++) {
+                var friend = yield user_1.User.findOne({ _id: user.friends[i] });
+                friends.push(friend);
+            }
+            ctx.body = friends;
+        });
+    });
     router.post('/api/login', function (ctx) {
         return __awaiter(this, void 0, void 0, function* () {
             var email = ctx.request.body.email;

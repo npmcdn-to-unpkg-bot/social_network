@@ -12,9 +12,11 @@ var core_1 = require("@angular/core");
 var api_service_1 = require("../../services/api.service");
 var router_1 = require("@angular/router");
 var AccountComponent = (function () {
-    function AccountComponent(api, route) {
+    function AccountComponent(api, route, router) {
         this.api = api;
         this.route = route;
+        this.router = router;
+        this.friends = [];
     }
     AccountComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -22,8 +24,14 @@ var AccountComponent = (function () {
             var id = param['id'];
             _this.api.get('http://192.168.0.228:3000/api/user/' + id).then(function (res) {
                 _this.user = res;
+                _this.api.get('http://192.168.0.228:3000/api/user/' + res._id + '/friends').then(function (res) {
+                    _this.friends = res;
+                });
             });
         });
+    };
+    AccountComponent.prototype.gotoFriend = function (id) {
+        this.router.navigate(['/account', id]);
     };
     AccountComponent = __decorate([
         core_1.Component({
@@ -31,7 +39,8 @@ var AccountComponent = (function () {
             styleUrls: ['../../../css/account.component.css']
         }),
         __param(0, core_1.Inject(api_service_1.ApiService)),
-        __param(1, core_1.Inject(router_1.ActivatedRoute))
+        __param(1, core_1.Inject(router_1.ActivatedRoute)),
+        __param(2, core_1.Inject(router_1.Router))
     ], AccountComponent);
     return AccountComponent;
 }());

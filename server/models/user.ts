@@ -6,7 +6,8 @@ var UserSchema = mongoose.Schema({
     password: String,
     email: String,
     image: String,
-    biography: String
+    biography: String,
+    friends: []
 });
 
 export var User = mongoose.model('user', UserSchema);

@@ -10,6 +10,16 @@ export function api(router) {
         ctx.body = await User.findOne({ _id: ctx.params.id });
     });
 
+    router.get('/api/user/:id/friends', async function(ctx) {
+        let user = await User.findOne({ _id: ctx.params.id });
+        let friends = [];
+        for (let i = 0; i < user.friends.length; i++) {
+            var friend = await User.findOne({_id: user.friends[i]});
+            friends.push(friend);
+        }
+        ctx.body = friends;
+    });
+
     router.post('/api/login', async function(ctx) {
         var email = ctx.request.body.email;
         var password = ctx.request.body.password;
