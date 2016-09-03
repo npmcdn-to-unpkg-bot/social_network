@@ -9,6 +9,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 export class AccountComponent implements OnInit {
     private user;
     private friends: any[] = [];
+    socket = null;
 
     constructor(@Inject(ApiService)private api: ApiService, @Inject(ActivatedRoute)private route: ActivatedRoute,
                 @Inject(Router)private router: Router) {}
@@ -23,6 +24,12 @@ export class AccountComponent implements OnInit {
                     this.friends = res;
                 });
             });
+        });
+
+        this.socket = io('http://192.168.0.228:3000');
+        this.socket.on('notification:addfriend', friend => {
+            if (this.api.getUserInfo().id == friend.id)
+                alert('Added!');
         });
     }
 

@@ -5,10 +5,10 @@ div.container
         img.profile-img([src]='user?.image').col-xs-12.col-md-4.col-sm-4
         h4.col-md-7.col-xs-12.col-sm-7 Full Name: {{ user?.firstName + ' ' + user?.lastName }}
         h4.col-md-7.col-xs-12.col-sm-7 User Bio: {{ user?.biography }}
-        div.friendcheck.col-md-1.col-xs-1.col-sm-1(*ngIf='!isMyAccount(user?._id) && user?.friends.includes(api.getUserInfo().id)')
+        div.friendcheck(*ngIf='!isMyAccount(user?._id) && user?.friends.includes(api.getUserInfo().id)')
             span.glyphicon.glyphicon-ok
         div.friendcheck.col-md-1.col-xs-1.col-sm-1(
-                *ngIf='isMyAccount(user?._id) === false && user?.friends.includes(api.getUserInfo().id) == false')
+        *ngIf='isMyAccount(user?._id) === false && user?.friends.includes(api.getUserInfo().id) == false')
             a((click)='addFriend(user?._id)'): span.glyphicon.glyphicon-plus
 
         h2.col-md-12.col-xs-12.col-sm-12 Friends:

@@ -27,6 +27,9 @@ var AppComponent = (function () {
     AppComponent.prototype.gotoAccount = function () {
         this.router.navigate(['/account', this.api.getUserInfo().id]);
     };
+    AppComponent.prototype.gotoNotifications = function () {
+        this.router.navigate(['/notifications']);
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'socialnetwork',

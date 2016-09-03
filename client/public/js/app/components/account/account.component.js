@@ -17,6 +17,7 @@ var AccountComponent = (function () {
         this.route = route;
         this.router = router;
         this.friends = [];
+        this.socket = null;
     }
     AccountComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -28,6 +29,11 @@ var AccountComponent = (function () {
                     _this.friends = res;
                 });
             });
+        });
+        this.socket = io('http://192.168.0.228:3000');
+        this.socket.on('notification:addfriend', function (friend) {
+            if (_this.api.getUserInfo().id == friend.id)
+                alert('Added!');
         });
     };
     AccountComponent.prototype.isMyAccount = function (id) {

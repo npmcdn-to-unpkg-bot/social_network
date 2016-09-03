@@ -7,7 +7,8 @@ var UserSchema = mongoose.Schema({
     email: String,
     image: String,
     biography: String,
-    friends: []
+    friends: [],
+    notifications: []
 });
 
 export var User = mongoose.model('user', UserSchema);

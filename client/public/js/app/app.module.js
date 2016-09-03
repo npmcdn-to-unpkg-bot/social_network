@@ -17,6 +17,7 @@ var api_service_1 = require("./services/api.service");
 var loggedin_guard_1 = require("./guards/loggedin.guard");
 var signup_component_1 = require("./components/authorization/signup.component");
 var account_component_1 = require("./components/account/account.component");
+var notifications_component_1 = require("./components/account/notifications.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -37,7 +38,8 @@ var AppModule = (function () {
                 home_component_1.HomeComponent,
                 signin_component_1.SigninComponent,
                 signup_component_1.SignupComponent,
-                account_component_1.AccountComponent
+                account_component_1.AccountComponent,
+                notifications_component_1.NotificationsComponent
             ],
             bootstrap: [
                 app_component_1.AppComponent

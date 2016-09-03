@@ -7,7 +7,8 @@ var UserSchema = mongoose.Schema({
     email: String,
     image: String,
     biography: String,
-    friends: []
+    friends: [],
+    notifications: []
 });
 exports.User = mongoose.model('user', UserSchema);
 //# sourceMappingURL=user.js.map

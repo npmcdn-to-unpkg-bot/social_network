@@ -22,4 +22,8 @@ export class AppComponent implements OnInit {
     gotoAccount() {
         this.router.navigate(['/account', this.api.getUserInfo().id]);
     }
+
+    gotoNotifications() {
+        this.router.navigate(['/notifications']);
+    }
 }

@@ -33,14 +33,8 @@ function api(router) {
         return __awaiter(this, void 0, void 0, function* () {
             var userId = ctx.request.body.id;
             var friendId = ctx.request.body.friend;
-            // User.findOne({ _id: userId }, (err, doc) => {
-            //     console.log(doc);
-            // });
-            //
-            // User.findOne({ _id: friendId }, (err, doc) => {
-            //     doc.friends.push(userId);
-            //     doc.save();
-            // });
+            var user = yield user_1.User.findOne({ _id: userId });
+            var friend = yield user_1.User.findOne({ _id: friendId });
             user_1.User.update({ _id: userId }, {
                 $push: {
                     friends: friendId
@@ -51,7 +45,8 @@ function api(router) {
             });
             user_1.User.update({ _id: friendId }, {
                 $push: {
-                    friends: userId
+                    friends: userId,
+                    notifications: user.firstName + ' ' + user.lastName + ' added you as a friend.'
                 }
             }, function (err) {
                 if (err)
@@ -77,7 +72,8 @@ function api(router) {
                         image: user.image,
                         bio: user.biography,
                         friends: user.friends,
-                        id: user._id
+                        id: user._id,
+                        notifications: user.notifications
                     };
                     ctx.body = { token: jwt.encode(payload, 'secret') };
                     return;

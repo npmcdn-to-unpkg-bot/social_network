@@ -1,0 +1,6 @@
+div.container
+    h1 Notifications for {{ api.getUserInfo().firstName }}
+
+    div.notifications(*ngFor='let notification of notifications')
+        div.notification
+            h4 {{ notification }}
