@@ -30,16 +30,19 @@ export class AccountComponent implements OnInit {
         return this.api.getUserInfo().id == id;
     }
 
-    isFriend(id): boolean {
-        for (let i = 0; i < this.api.getUserInfo().friends.length; i++) {
-            if (this.api.getUserInfo().friends[i] == id)
-                return true;
-        }
-
-        return false;
-    }
-
     gotoFriend(id) {
         this.router.navigate(['/account', id]);
+    }
+
+    addFriend(id) {
+        let body = {
+            id: this.api.getUserInfo().id,
+            friend: id
+        };
+
+        this.api.post('http://192.168.0.228:3000/api/user/addFriend', body).then(res => {
+            if (res.succes)
+                this.router.navigate(['/account', this.api.getUserInfo().id]);
+        });
     }
 }

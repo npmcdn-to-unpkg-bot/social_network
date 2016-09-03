@@ -33,15 +33,19 @@ var AccountComponent = (function () {
     AccountComponent.prototype.isMyAccount = function (id) {
         return this.api.getUserInfo().id == id;
     };
-    AccountComponent.prototype.isFriend = function (id) {
-        for (var i = 0; i < this.api.getUserInfo().friends.length; i++) {
-            if (this.api.getUserInfo().friends[i] == id)
-                return true;
-        }
-        return false;
-    };
     AccountComponent.prototype.gotoFriend = function (id) {
         this.router.navigate(['/account', id]);
+    };
+    AccountComponent.prototype.addFriend = function (id) {
+        var _this = this;
+        var body = {
+            id: this.api.getUserInfo().id,
+            friend: id
+        };
+        this.api.post('http://192.168.0.228:3000/api/user/addFriend', body).then(function (res) {
+            if (res.succes)
+                _this.router.navigate(['/account', _this.api.getUserInfo().id]);
+        });
     };
     AccountComponent = __decorate([
         core_1.Component({

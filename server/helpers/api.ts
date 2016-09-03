@@ -20,6 +20,38 @@ export function api(router) {
         ctx.body = friends;
     });
 
+    router.post('/api/user/addFriend', async function(ctx) {
+        let userId = ctx.request.body.id;
+        let friendId = ctx.request.body.friend;
+
+        // User.findOne({ _id: userId }, (err, doc) => {
+        //     console.log(doc);
+        // });
+        //
+        // User.findOne({ _id: friendId }, (err, doc) => {
+        //     doc.friends.push(userId);
+        //     doc.save();
+        // });
+
+        User.update({ _id: userId }, {
+            $push: {
+                friends: friendId
+            }
+        }, (err) => {
+            if (err) throw err;
+        });
+
+        User.update({ _id: friendId }, {
+            $push: {
+                friends: userId
+            }
+        }, (err) => {
+            if (err) throw err;
+        });
+
+        ctx.body = { succes: true };
+    });
+
     router.post('/api/login', async function(ctx) {
         var email = ctx.request.body.email;
         var password = ctx.request.body.password;

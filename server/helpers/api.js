@@ -29,6 +29,37 @@ function api(router) {
             ctx.body = friends;
         });
     });
+    router.post('/api/user/addFriend', function (ctx) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var userId = ctx.request.body.id;
+            var friendId = ctx.request.body.friend;
+            // User.findOne({ _id: userId }, (err, doc) => {
+            //     console.log(doc);
+            // });
+            //
+            // User.findOne({ _id: friendId }, (err, doc) => {
+            //     doc.friends.push(userId);
+            //     doc.save();
+            // });
+            user_1.User.update({ _id: userId }, {
+                $push: {
+                    friends: friendId
+                }
+            }, function (err) {
+                if (err)
+                    throw err;
+            });
+            user_1.User.update({ _id: friendId }, {
+                $push: {
+                    friends: userId
+                }
+            }, function (err) {
+                if (err)
+                    throw err;
+            });
+            ctx.body = { succes: true };
+        });
+    });
     router.post('/api/login', function (ctx) {
         return __awaiter(this, void 0, void 0, function* () {
             var email = ctx.request.body.email;
