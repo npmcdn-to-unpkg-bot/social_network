@@ -19,4 +19,5 @@ A social network that I'm making just for fun.
 * Direct messaging
 * Writing posts that all your friends can see
 * Deleting friends and blocking people
+* Uploading profile images
 * whatever else I come up with in the future
