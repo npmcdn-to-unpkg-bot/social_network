@@ -6,6 +6,10 @@ import * as crypto from 'crypto';
 mongoose.connect('mongodb://192.168.0.228:27017/socialnetwork'); // Connecting to mongodb database
 
 export function api(router) {
+    router.get('/api/user/:id', async function(ctx) {
+        ctx.body = await User.findOne({ _id: ctx.params.id });
+    });
+
     router.post('/api/login', async function(ctx) {
         var email = ctx.request.body.email;
         var password = ctx.request.body.password;
@@ -21,6 +25,8 @@ export function api(router) {
                     email: email,
                     firstName: user.firstName,
                     lastName: user.lastName,
+                    image: user.image,
+                    bio: user.biography,
                     id: user._id
                 };
 
@@ -50,7 +56,8 @@ export function api(router) {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
-                password: hashedPassword
+                password: hashedPassword,
+                image: '/img/default-avatar.png'
             });
             await newUser.save();
             ctx.body = { success: true };

@@ -9,6 +9,7 @@ import {SigninComponent} from "./components/authorization/signin.component";
 import {ApiService} from "./services/api.service";
 import {LoggedinGuard} from "./guards/loggedin.guard";
 import {SignupComponent} from "./components/authorization/signup.component";
+import {AccountComponent} from "./components/account/account.component";
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import {SignupComponent} from "./components/authorization/signup.component";
         AppComponent,
         HomeComponent,
         SigninComponent,
-        SignupComponent
+        SignupComponent,
+        AccountComponent
     ],
     bootstrap: [
         AppComponent

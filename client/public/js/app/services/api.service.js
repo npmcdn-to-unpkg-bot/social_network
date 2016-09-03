@@ -41,8 +41,10 @@ var ApiService = (function () {
      */
     ApiService.prototype.getUserInfo = function () {
         var item = window.localStorage.getItem('Token');
-        var payload = item.split('.')[1];
-        return btoa(payload);
+        if (item) {
+            var payload = item.split('.')[1];
+            return JSON.parse(atob(payload));
+        }
     };
     ApiService = __decorate([
         core_1.Injectable(),

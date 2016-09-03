@@ -1,6 +1,7 @@
 // Imports
-import {Component, Inject} from "@angular/core";
+import {Component, Inject, OnInit} from "@angular/core";
 import {ApiService} from "../services/api.service";
+import {Router} from "@angular/router";
 
 /**
  * Component that will contain the header with all the links.
@@ -10,13 +11,15 @@ import {ApiService} from "../services/api.service";
     styleUrls: ['../../../css/app.component.css'],
     templateUrl: '/js/app/templates/app.component.html'
 })
-export class AppComponent {
-    private userSignedIn: boolean;
+export class AppComponent implements OnInit {
+    constructor(@Inject(ApiService)private api: ApiService, @Inject(Router)private router: Router) {}
 
-    constructor(@Inject(ApiService)private api: ApiService) {
-        if (this.api.getUserInfo().email)
-            this.userSignedIn = true;
-        else
-            this.userSignedIn = false;
+    logout(): void {
+        window.localStorage.removeItem("Token");
+        this.router.navigate(['/signin']);
+    }
+
+    gotoAccount() {
+        this.router.navigate(['/account', this.api.getUserInfo().id]);
     }
 }

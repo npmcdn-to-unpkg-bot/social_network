@@ -13,6 +13,11 @@ var jwt = require('jwt-simple');
 var crypto = require('crypto');
 mongoose.connect('mongodb://192.168.0.228:27017/socialnetwork'); // Connecting to mongodb database
 function api(router) {
+    router.get('/api/user/:id', function (ctx) {
+        return __awaiter(this, void 0, void 0, function* () {
+            ctx.body = yield user_1.User.findOne({ _id: ctx.params.id });
+        });
+    });
     router.post('/api/login', function (ctx) {
         return __awaiter(this, void 0, void 0, function* () {
             var email = ctx.request.body.email;
@@ -27,6 +32,8 @@ function api(router) {
                         email: email,
                         firstName: user.firstName,
                         lastName: user.lastName,
+                        image: user.image,
+                        bio: user.biography,
                         id: user._id
                     };
                     ctx.body = { token: jwt.encode(payload, 'secret') };
@@ -56,7 +63,8 @@ function api(router) {
                     firstName: firstName,
                     lastName: lastName,
                     email: email,
-                    password: hashedPassword
+                    password: hashedPassword,
+                    image: '/img/default-avatar.png'
                 });
                 yield newUser.save();
                 ctx.body = { success: true };

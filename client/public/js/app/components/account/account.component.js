@@ -8,35 +8,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-// Imports
 var core_1 = require("@angular/core");
-var api_service_1 = require("../services/api.service");
+var api_service_1 = require("../../services/api.service");
 var router_1 = require("@angular/router");
-/**
- * Component that will contain the header with all the links.
- */
-var AppComponent = (function () {
-    function AppComponent(api, router) {
+var AccountComponent = (function () {
+    function AccountComponent(api, route) {
         this.api = api;
-        this.router = router;
+        this.route = route;
     }
-    AppComponent.prototype.logout = function () {
-        window.localStorage.removeItem("Token");
-        this.router.navigate(['/signin']);
+    AccountComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.forEach(function (param) {
+            var id = param['id'];
+            _this.api.get('http://192.168.0.228:3000/api/user/' + id).then(function (res) {
+                _this.user = res;
+            });
+        });
     };
-    AppComponent.prototype.gotoAccount = function () {
-        this.router.navigate(['/account', this.api.getUserInfo().id]);
-    };
-    AppComponent = __decorate([
+    AccountComponent = __decorate([
         core_1.Component({
-            selector: 'socialnetwork',
-            styleUrls: ['../../../css/app.component.css'],
-            templateUrl: '/js/app/templates/app.component.html'
+            templateUrl: '/js/app/templates/account/account.component.html',
+            styleUrls: ['../../../css/account.component.css']
         }),
         __param(0, core_1.Inject(api_service_1.ApiService)),
-        __param(1, core_1.Inject(router_1.Router))
-    ], AppComponent);
-    return AppComponent;
+        __param(1, core_1.Inject(router_1.ActivatedRoute))
+    ], AccountComponent);
+    return AccountComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.AccountComponent = AccountComponent;
+//# sourceMappingURL=account.component.js.map

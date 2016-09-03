@@ -15,17 +15,14 @@ nav.navbar.navbar-default
                 li: a(routerLink='home', routerLinkActive='active') Home
 
             ul.nav.navbar-nav.navbar-right
-                //li: a(routerLink='account', routerLinkActive='active'): img.avatar(src='/img/default-avatar.png')
-                li.dropdown
+                li.dropdown(*ngIf='api.getUserInfo()')
                     a.dropdown-toggle(type='button', id='menu1', data-toggle='dropdown')
-                        img.avatar(src='/img/default-avatar.png')
+                        img.avatar([src]='api.getUserInfo().image')
                         span.caret
                     ul.dropdown-menu(role='menu', aria-labelledby='menu1')
-                        li(role='presentation'): a(role='menuitem', tabindex='-1', routerLink='account',
-                                                    routerLinkActive='active') Account
+                        li(role='presentation'): a(role='menuitem', tabindex='-1', (click)='gotoAccount()') Account
                         li.divider
-                        li(role='presentation'): a(role='menuitem', tabindex='-1', routerLink='account',
-                                                    routerLinkActive='active') Sign Out
+                        li(role='presentation'): a(role='menuitem', tabindex='-1', (click)='logout()') Sign Out
                 li: a(routerLink='signin', routerLinkActive='active') Sign In
                 li: a(routerLink='signup', routerLinkActive='active') Sign Up
 router-outlet

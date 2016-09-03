@@ -34,8 +34,10 @@ export class ApiService {
      */
     getUserInfo() {
         let item = window.localStorage.getItem('Token');
-        let payload = item.split('.')[1];
 
-        return btoa(payload);
+        if (item) {
+            let payload = item.split('.')[1];
+            return JSON.parse(atob(payload));
+        }
     }
 }
