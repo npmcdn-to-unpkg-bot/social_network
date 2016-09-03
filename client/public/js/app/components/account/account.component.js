@@ -30,6 +30,16 @@ var AccountComponent = (function () {
             });
         });
     };
+    AccountComponent.prototype.isMyAccount = function (id) {
+        return this.api.getUserInfo().id == id;
+    };
+    AccountComponent.prototype.isFriend = function (id) {
+        for (var i = 0; i < this.api.getUserInfo().friends.length; i++) {
+            if (this.api.getUserInfo().friends[i] == id)
+                return true;
+        }
+        return false;
+    };
     AccountComponent.prototype.gotoFriend = function (id) {
         this.router.navigate(['/account', id]);
     };

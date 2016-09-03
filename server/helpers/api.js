@@ -45,6 +45,7 @@ function api(router) {
                         lastName: user.lastName,
                         image: user.image,
                         bio: user.biography,
+                        friends: user.friends,
                         id: user._id
                     };
                     ctx.body = { token: jwt.encode(payload, 'secret') };
@@ -75,7 +76,8 @@ function api(router) {
                     lastName: lastName,
                     email: email,
                     password: hashedPassword,
-                    image: '/img/default-avatar.png'
+                    image: '/img/default-avatar.png',
+                    biography: ''
                 });
                 yield newUser.save();
                 ctx.body = { success: true };

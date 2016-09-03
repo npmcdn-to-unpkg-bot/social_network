@@ -37,6 +37,7 @@ export function api(router) {
                     lastName: user.lastName,
                     image: user.image,
                     bio: user.biography,
+                    friends: user.friends,
                     id: user._id
                 };
 
@@ -67,7 +68,8 @@ export function api(router) {
                 lastName: lastName,
                 email: email,
                 password: hashedPassword,
-                image: '/img/default-avatar.png'
+                image: '/img/default-avatar.png',
+                biography: ''
             });
             await newUser.save();
             ctx.body = { success: true };

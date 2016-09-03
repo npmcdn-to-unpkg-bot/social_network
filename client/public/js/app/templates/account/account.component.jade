@@ -1,11 +1,20 @@
 div.container
     h1 {{ user?.firstName }}'s Account
+    h5(*ngIf='isMyAccount(user?._id)') (Your Account)
     div.row
         img.profile-img([src]='user?.image').col-xs-12.col-md-4.col-sm-4
         h4.col-md-7.col-xs-12.col-sm-7 Full Name: {{ user?.firstName + ' ' + user?.lastName }}
         h4.col-md-7.col-xs-12.col-sm-7 User Bio: {{ user?.biography }}
+        div.friendcheck.col-md-1.col-xs-1.col-sm-1(*ngIf='!isMyAccount(user?._id) && isFriend(user?._id)')
+            span.glyphicon.glyphicon-ok
 
         h2.col-md-12.col-xs-12.col-sm-12 Friends:
 
-        div.friends(*ngFor='let friend of friends').col-md-12.col-xs-12.col-sm-12
-            h4: a((click)='gotoFriend(friend?._id)') {{ friend?.firstName }}
+        div.friends.col-md-12.col-xs-12.col-sm-12
+            h4(*ngIf='friends?.length <= 0') This user doesn't have any friends.
+            div.friendsList(*ngFor='let friend of friends')
+                div.friend()
+                    img.avatar([src]='friend?.image')
+                    div
+                        h4: a((click)='gotoFriend(friend?._id)') {{ friend?.firstName + ' ' + friend?.lastName }}
+                        h5 {{ friend?.biography }}

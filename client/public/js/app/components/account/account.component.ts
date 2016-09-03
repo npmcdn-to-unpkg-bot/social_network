@@ -26,6 +26,19 @@ export class AccountComponent implements OnInit {
         });
     }
 
+    isMyAccount(id): boolean {
+        return this.api.getUserInfo().id == id;
+    }
+
+    isFriend(id): boolean {
+        for (let i = 0; i < this.api.getUserInfo().friends.length; i++) {
+            if (this.api.getUserInfo().friends[i] == id)
+                return true;
+        }
+
+        return false;
+    }
+
     gotoFriend(id) {
         this.router.navigate(['/account', id]);
     }
