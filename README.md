@@ -20,4 +20,5 @@ A social network that I'm making just for fun.
 * Writing posts that all your friends can see
 * Deleting friends and blocking people
 * Uploading profile images
+* Searching for people
 * whatever else I come up with in the future
