@@ -1,1 +1,1 @@
-<div class="container"><h1>Notifications for {{ api.getUserInfo().firstName }}</h1><div *ngFor="let notification of notifications" class="notifications"><div class="notification"><h4>{{ notification }}</h4></div></div></div>
+<div class="container"><h1>Notifications for {{ api.getUserInfo().firstName }}</h1><div *ngFor="let notification of notifications" class="notifications"><div class="notification"><h4>{{ notification.content }}</h4><a (click)="deleteNotification(notifications.indexOf(notification), notification.id)" class="btn btn-danger">Delete</a></div></div></div>

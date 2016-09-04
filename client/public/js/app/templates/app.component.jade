@@ -24,9 +24,6 @@ nav.navbar.navbar-default
                         li(role='presentation'): a(role='menuitem', tabindex='-1',
                             (click)='gotoNotifications()')
                             | Notifications
-                            | <span
-                            | class='glyphicon glyphicon-exclamation-sign'
-                            | *ngIf='api.getUserInfo().notifications.length >= 1'></span>
                         li.divider
                         li(role='presentation'): a(role='menuitem', tabindex='-1', (click)='logout()') Sign Out
                 li: a(routerLink='signin', routerLinkActive='active') Sign In

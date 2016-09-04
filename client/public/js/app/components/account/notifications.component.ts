@@ -5,11 +5,26 @@ import {ApiService} from "../../services/api.service";
     templateUrl: '/js/app/templates/account/notifications.component.html'
 })
 export class NotificationsComponent implements OnInit {
-    private notifications: any[] = [];
+    private notifications = [];
+    socket = null;
 
-    constructor(@Inject(ApiService)private api: ApiService) {}
+    constructor(@Inject(ApiService)private api: ApiService) {
+        this.socket = io('http://192.168.0.228:3000');
+        this.socket.on('notification:addfriend', friend => {
+            if (this.api.getUserInfo().id == friend.id)
+                this.notifications.push(friend.notification);
+        });
+    }
 
     ngOnInit() {
-        this.notifications = this.api.getUserInfo().notifications;
+        this.api.get('http://192.168.0.228:3000/api/user/' + this.api.getUserInfo().id).then(res => {
+            this.notifications = res.notifications;
+        });
+    }
+
+    deleteNotification(index, id) {
+        this.notifications.splice(index);
+        this.api.post('http://192.168.0.228:3000/api/user/' + this.api.getUserInfo().id + '/deleteNotification/' +
+            id, {});
     }
 }

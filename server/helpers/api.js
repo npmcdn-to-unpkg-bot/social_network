@@ -11,6 +11,7 @@ var user_1 = require('../models/user');
 var mongoose = require('mongoose');
 var jwt = require('jwt-simple');
 var crypto = require('crypto');
+var server_1 = require("../server");
 mongoose.connect('mongodb://192.168.0.228:27017/socialnetwork'); // Connecting to mongodb database
 function api(router) {
     router.get('/api/user/:id', function (ctx) {
@@ -35,6 +36,10 @@ function api(router) {
             var friendId = ctx.request.body.friend;
             var user = yield user_1.User.findOne({ _id: userId });
             var friend = yield user_1.User.findOne({ _id: friendId });
+            var notification = {
+                id: mongoose.Types.ObjectId(),
+                content: user.firstName + ' ' + user.lastName + ' added you as a friend.'
+            };
             user_1.User.update({ _id: userId }, {
                 $push: {
                     friends: friendId
@@ -46,13 +51,31 @@ function api(router) {
             user_1.User.update({ _id: friendId }, {
                 $push: {
                     friends: userId,
-                    notifications: user.firstName + ' ' + user.lastName + ' added you as a friend.'
+                    notifications: notification
                 }
             }, function (err) {
                 if (err)
                     throw err;
             });
+            var ioData = {
+                notification: notification,
+                id: friend._id
+            };
+            server_1.io.sockets.emit('notification:addfriend', ioData);
             ctx.body = { succes: true };
+        });
+    });
+    router.post('/api/user/:id/deleteNotification/:notification_id', function (ctx) {
+        return __awaiter(this, void 0, void 0, function* () {
+            user_1.User.update({ _id: ctx.params.id }, {
+                $pull: {
+                    notifications: { id: new mongoose.Types.ObjectId(ctx.params.notification_id) }
+                }
+            }, function (err) {
+                if (err)
+                    throw err;
+            });
+            ctx.body = 'Removed!';
         });
     });
     router.post('/api/login', function (ctx) {
@@ -72,8 +95,7 @@ function api(router) {
                         image: user.image,
                         bio: user.biography,
                         friends: user.friends,
-                        id: user._id,
-                        notifications: user.notifications
+                        id: user._id
                     };
                     ctx.body = { token: jwt.encode(payload, 'secret') };
                     return;

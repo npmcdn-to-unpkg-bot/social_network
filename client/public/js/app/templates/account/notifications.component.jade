@@ -3,4 +3,5 @@ div.container
 
     div.notifications(*ngFor='let notification of notifications')
         div.notification
-            h4 {{ notification }}
+            h4 {{ notification.content }}
+            a.btn.btn-danger((click)='deleteNotification(notifications.indexOf(notification), notification.id)') Delete

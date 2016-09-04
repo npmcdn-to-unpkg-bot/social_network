@@ -2,7 +2,7 @@ import {User} from '../models/user';
 import * as mongoose from 'mongoose';
 import * as jwt from 'jwt-simple';
 import * as crypto from 'crypto';
-import {ioServer} from "../server";
+import {io} from "../server";
 
 mongoose.connect('mongodb://192.168.0.228:27017/socialnetwork'); // Connecting to mongodb database
 
@@ -26,6 +26,10 @@ export function api(router) {
         let friendId = ctx.request.body.friend;
         let user = await User.findOne({ _id: userId });
         let friend = await User.findOne({ _id: friendId });
+        let notification = {
+            id: mongoose.Types.ObjectId(),
+            content: user.firstName + ' ' + user.lastName + ' added you as a friend.'
+        };
 
         User.update({ _id: userId }, {
             $push: {
@@ -38,13 +42,31 @@ export function api(router) {
         User.update({ _id: friendId }, {
             $push: {
                 friends: userId,
-                notifications: user.firstName + ' ' + user.lastName + ' added you as a friend.'
+                notifications: notification
             }
         }, (err) => {
             if (err) throw err;
         });
 
+        let ioData = {
+            notification: notification,
+            id: friend._id
+        };
+        io.sockets.emit('notification:addfriend', ioData);
+
         ctx.body = { succes: true };
+    });
+
+    router.post('/api/user/:id/deleteNotification/:notification_id', async function(ctx) {
+        User.update({ _id: ctx.params.id }, {
+            $pull: {
+                notifications: {id: new mongoose.Types.ObjectId(ctx.params.notification_id)}
+            }
+        }, err => {
+            if (err) throw err;
+        });
+
+        ctx.body = 'Removed!';
     });
 
     router.post('/api/login', async function(ctx) {
@@ -65,8 +87,7 @@ export function api(router) {
                     image: user.image,
                     bio: user.biography,
                     friends: user.friends,
-                    id: user._id,
-                    notifications: user.notifications
+                    id: user._id
                 };
 
                 ctx.body = { token: jwt.encode(payload, 'secret') };
