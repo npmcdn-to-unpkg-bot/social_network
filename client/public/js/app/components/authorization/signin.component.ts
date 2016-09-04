@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 
 @Component({
     templateUrl: '/js/app/templates/authorization/signin.component.html',
-    styleUrls: ['../../../css/signin.component.css']
+    styleUrls: ['../../../css/compiled/signin.component.css']
 })
 export class SigninComponent {
     private email: string;
@@ -27,8 +27,8 @@ export class SigninComponent {
                 password: this.password
             }).then(res => {
                 if (res.token) {
-                    this.router.navigate(['/home']);
                     window.localStorage.setItem("Token", res.token);
+                    this.router.navigate(['/account', this.api.getUserInfo().id]);
                 } else if (res.error) {
                     this.error = true;
                 }

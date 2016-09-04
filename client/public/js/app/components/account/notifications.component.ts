@@ -11,8 +11,9 @@ export class NotificationsComponent implements OnInit {
     constructor(@Inject(ApiService)private api: ApiService) {
         this.socket = io('http://192.168.0.228:3000');
         this.socket.on('notification:addfriend', friend => {
-            if (this.api.getUserInfo().id == friend.id)
+            if (this.api.getUserInfo().id == friend.id) {
                 this.notifications.push(friend.notification);
+            }
         });
     }
 
@@ -23,6 +24,7 @@ export class NotificationsComponent implements OnInit {
     }
 
     deleteNotification(index, id) {
+        this.socket.emit('deleteNotification', 1);
         this.notifications.splice(index);
         this.api.post('http://192.168.0.228:3000/api/user/' + this.api.getUserInfo().id + '/deleteNotification/' +
             id, {});

@@ -53,6 +53,7 @@ export function api(router) {
             id: friend._id
         };
         io.sockets.emit('notification:addfriend', ioData);
+        io.sockets.emit('getNotification', { id: friendId });
 
         ctx.body = { succes: true };
     });
@@ -66,6 +67,7 @@ export function api(router) {
             if (err) throw err;
         });
 
+        io.sockets.emit('deleteNotification', { id: ctx.params.id });
         ctx.body = 'Removed!';
     });
 

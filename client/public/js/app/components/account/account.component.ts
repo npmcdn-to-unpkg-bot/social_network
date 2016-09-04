@@ -4,7 +4,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 
 @Component({
     templateUrl: '/js/app/templates/account/account.component.html',
-    styleUrls: ['../../../css/account.component.css']
+    styleUrls: ['../../../css/compiled/account.component.css']
 })
 export class AccountComponent implements OnInit {
     private user;

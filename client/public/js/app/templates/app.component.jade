@@ -1,3 +1,5 @@
+//output:./app.component.html
+
 nav.navbar.navbar-default
     div.container-fluid
         div.navbar-header
@@ -24,6 +26,7 @@ nav.navbar.navbar-default
                         li(role='presentation'): a(role='menuitem', tabindex='-1',
                             (click)='gotoNotifications()')
                             | Notifications
+                            | <span *ngIf='notifications >= 1' class='glyphicon glyphicon-exclamation-sign'></span>
                         li.divider
                         li(role='presentation'): a(role='menuitem', tabindex='-1', (click)='logout()') Sign Out
                 li: a(routerLink='signin', routerLinkActive='active') Sign In

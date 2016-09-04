@@ -1,14 +1,14 @@
 "use strict";
 // Imports
-var Koa = require('koa');
-var serve = require('koa-static');
-var views = require('koa-views');
-var http = require('http');
+const Koa = require('koa');
+const serve = require('koa-static');
+const views = require('koa-views');
+const http = require('http');
 /**
  * Function that creates a koa app and returns it.
  */
 function setupApp() {
-    var app = new Koa();
+    let app = new Koa();
     app.use(views('../client/views', { extension: 'pug' }));
     app.use(serve('../client/public'));
     app.use(serve('../client/node_modules'));
@@ -21,7 +21,7 @@ exports.setupApp = setupApp;
  * @param app The koa app that will be converted.
  */
 function createHttpServer(app) {
-    var server = http.Server(app.callback());
+    let server = http.Server(app.callback());
     return server;
 }
 exports.createHttpServer = createHttpServer;
