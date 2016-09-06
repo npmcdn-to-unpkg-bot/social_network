@@ -43,6 +43,29 @@ export function api(router) {
         }
     });
 
+    router.get('/api/search/:term', async function(ctx) {
+        let term = ctx.params.term;
+
+        let email = await User.find({ email: term });
+        let firstName = await User.find({ firstName: term.replace(/\b\w/g, l => l.toUpperCase()) });
+        let lastName = await User.find({ lastName: term.replace(/\b\w/g, l => l.toUpperCase()) });
+
+        if (email.length > 0) {
+            ctx.body = email;
+            return;
+        } else if (firstName.length > 0) {
+            ctx.body = firstName;
+            return;
+        } else if (lastName.length > 0) {
+            ctx.body = lastName;
+            return;
+        } else {
+            //ctx.body = { error: 'No users found with term ' + term };
+            ctx.body = email;
+            return;
+        }
+    });
+
     router.post('/api/user/addFriend', async function(ctx) {
         let userId = ctx.request.body.id;
         let friendId = ctx.request.body.friend;

@@ -19,6 +19,7 @@ var signup_component_1 = require("./components/authorization/signup.component");
 var account_component_1 = require("./components/account/account.component");
 var notifications_component_1 = require("./components/account/notifications.component");
 var edit_account_component_1 = require("./components/account/edit-account.component");
+var show_search_result_component_1 = require("./components/search/show-search-result.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -41,7 +42,8 @@ var AppModule = (function () {
                 signup_component_1.SignupComponent,
                 account_component_1.AccountComponent,
                 notifications_component_1.NotificationsComponent,
-                edit_account_component_1.EditAccountComponent
+                edit_account_component_1.EditAccountComponent,
+                show_search_result_component_1.ShowSearchResultComponent
             ],
             bootstrap: [
                 app_component_1.AppComponent

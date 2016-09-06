@@ -1,0 +1,23 @@
+.account {
+  padding: 10px 10px 0;
+  border: 1px solid #3a3a3a;
+  margin-bottom: 10px;
+}
+.account a {
+  cursor: pointer;
+}
+.account img,
+.account div {
+  display: inline-block;
+}
+.account img {
+  margin-right: 10px;
+  margin-bottom: 28px;
+}
+.account div h5 {
+  color: #8f8f8f;
+}
+.account .avatar {
+  width: 50px;
+  border-radius: 5%;
+}

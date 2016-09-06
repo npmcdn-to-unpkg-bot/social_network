@@ -6,6 +6,7 @@ import {SignupComponent} from "./components/authorization/signup.component";
 import {AccountComponent} from "./components/account/account.component";
 import {NotificationsComponent} from "./components/account/notifications.component";
 import {EditAccountComponent} from "./components/account/edit-account.component";
+import {ShowSearchResultComponent} from "./components/search/show-search-result.component";
 
 // Array of angular routes
 const appRoutes: Routes = [
@@ -15,7 +16,8 @@ const appRoutes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'account/:id', component: AccountComponent, canActivate: [LoggedinGuard] },
     { path: 'notifications', component: NotificationsComponent, canActivate: [LoggedinGuard] },
-    { path: 'edit_account', component: EditAccountComponent, canActivate: [LoggedinGuard] }
+    { path: 'edit_account', component: EditAccountComponent, canActivate: [LoggedinGuard] },
+    { path: 'search/:search_term', component: ShowSearchResultComponent, canActivate: [LoggedinGuard] }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

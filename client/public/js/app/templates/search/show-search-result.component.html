@@ -1,0 +1,1 @@
+<div class="container"><h1>Results</h1><div *ngFor="let user of results" class="results"><div class="account"><img [src]="user.image" class="avatar"/><div><h4><a (click)="gotoAccount(user._id)">{{ user.firstName + ' ' + user.lastName }}</a></h4><h5>{{ user.biography }}</h5></div></div></div></div>

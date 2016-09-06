@@ -13,6 +13,7 @@ import {Router} from "@angular/router";
 })
 export class AppComponent implements OnInit {
     private notifications: number;
+    private searchTerm: string;
     socket = null;
 
     constructor(@Inject(ApiService)private api: ApiService, @Inject(Router)private router: Router) {}
@@ -46,5 +47,9 @@ export class AppComponent implements OnInit {
 
     gotoNotifications() {
         this.router.navigate(['/notifications']);
+    }
+
+    search() {
+        this.router.navigate(['/search', this.searchTerm]);
     }
 }

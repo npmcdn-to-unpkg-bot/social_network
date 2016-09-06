@@ -52,6 +52,31 @@ function api(router) {
             }
         });
     });
+    router.get('/api/search/:term', function (ctx) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var term = ctx.params.term;
+            var email = yield user_1.User.find({ email: term });
+            var firstName = yield user_1.User.find({ firstName: term.replace(/\b\w/g, function (l) { return l.toUpperCase(); }) });
+            var lastName = yield user_1.User.find({ lastName: term.replace(/\b\w/g, function (l) { return l.toUpperCase(); }) });
+            if (email.length > 0) {
+                ctx.body = email;
+                return;
+            }
+            else if (firstName.length > 0) {
+                ctx.body = firstName;
+                return;
+            }
+            else if (lastName.length > 0) {
+                ctx.body = lastName;
+                return;
+            }
+            else {
+                //ctx.body = { error: 'No users found with term ' + term };
+                ctx.body = email;
+                return;
+            }
+        });
+    });
     router.post('/api/user/addFriend', function (ctx) {
         return __awaiter(this, void 0, void 0, function* () {
             var userId = ctx.request.body.id;

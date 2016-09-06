@@ -1,0 +1,9 @@
+div.container
+    h1 Results
+
+    div.results(*ngFor='let user of results')
+        div.account
+            img.avatar([src]='user.image')
+            div
+                h4: a((click)='gotoAccount(user._id)') {{ user.firstName + ' ' + user.lastName }}
+                h5 {{ user.biography }}

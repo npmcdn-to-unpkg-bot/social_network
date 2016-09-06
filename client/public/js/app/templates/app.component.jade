@@ -14,6 +14,11 @@ nav.navbar.navbar-default
             ul.nav.navbar-nav
                 li: a(routerLink='home', routerLinkActive='active') Home
 
+            form.navbar-form.navbar-right((ngSubmit)='search()')
+                div.form-group.input-group
+                    input.form-control(type='text', name='search', placeholder='Search for people', [(ngModel)]='searchTerm')
+                    span.input-group-btn: button.btn.btn-default(type='submit'): span.glyphicon.glyphicon-search
+
             ul.nav.navbar-nav.navbar-right
                 li.dropdown(*ngIf='api.getUserInfo()')
                     a.dropdown-toggle(type='button', id='menu1', data-toggle='dropdown')

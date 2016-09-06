@@ -48,6 +48,9 @@ var AppComponent = (function () {
     AppComponent.prototype.gotoNotifications = function () {
         this.router.navigate(['/notifications']);
     };
+    AppComponent.prototype.search = function () {
+        this.router.navigate(['/search', this.searchTerm]);
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'socialnetwork',

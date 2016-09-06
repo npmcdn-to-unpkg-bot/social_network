@@ -7,6 +7,7 @@ var signup_component_1 = require("./components/authorization/signup.component");
 var account_component_1 = require("./components/account/account.component");
 var notifications_component_1 = require("./components/account/notifications.component");
 var edit_account_component_1 = require("./components/account/edit-account.component");
+var show_search_result_component_1 = require("./components/search/show-search-result.component");
 // Array of angular routes
 var appRoutes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,7 +16,8 @@ var appRoutes = [
     { path: 'signup', component: signup_component_1.SignupComponent },
     { path: 'account/:id', component: account_component_1.AccountComponent, canActivate: [loggedin_guard_1.LoggedinGuard] },
     { path: 'notifications', component: notifications_component_1.NotificationsComponent, canActivate: [loggedin_guard_1.LoggedinGuard] },
-    { path: 'edit_account', component: edit_account_component_1.EditAccountComponent, canActivate: [loggedin_guard_1.LoggedinGuard] }
+    { path: 'edit_account', component: edit_account_component_1.EditAccountComponent, canActivate: [loggedin_guard_1.LoggedinGuard] },
+    { path: 'search/:search_term', component: show_search_result_component_1.ShowSearchResultComponent, canActivate: [loggedin_guard_1.LoggedinGuard] }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes);
 //# sourceMappingURL=app.routing.js.map
