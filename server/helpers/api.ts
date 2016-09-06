@@ -21,6 +21,28 @@ export function api(router) {
         ctx.body = friends;
     });
 
+    router.post('/api/user/:id/update', async function(ctx) {
+        let email = ctx.request.body.email;
+        let firstName = ctx.request.body.firstName;
+        let lastName = ctx.request.body.lastName;
+
+        let user = await User.find({ email: email, _id: { $ne: new mongoose.Types.ObjectId(ctx.params.id) } });
+
+        if (user.length > 0) {
+            ctx.body = { error: 'A user with that email already exists!' };
+            return;
+        } else {
+            User.findOne({ _id: ctx.params.id }, (err, doc) => {
+                doc.firstName = firstName;
+                doc.lastName = lastName;
+                doc.email = email;
+                doc.save();
+            });
+            ctx.body = { succes: true };
+            return;
+        }
+    });
+
     router.post('/api/user/addFriend', async function(ctx) {
         let userId = ctx.request.body.id;
         let friendId = ctx.request.body.friend;

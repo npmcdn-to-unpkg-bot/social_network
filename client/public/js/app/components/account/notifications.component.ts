@@ -9,6 +9,7 @@ export class NotificationsComponent implements OnInit {
     socket = null;
 
     constructor(@Inject(ApiService)private api: ApiService) {
+        //noinspection TypeScriptUnresolvedFunction
         this.socket = io('http://192.168.0.228:3000');
         this.socket.on('notification:addfriend', friend => {
             if (this.api.getUserInfo().id == friend.id) {

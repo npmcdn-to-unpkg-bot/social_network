@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
  */
 @Component({
     selector: 'socialnetwork',
-    styleUrls: ['../../../css/compiled/app.component.css'],
+    styleUrls: ['../../../css/app.component.css'],
     templateUrl: '/js/app/templates/app.component.html'
 })
 export class AppComponent implements OnInit {

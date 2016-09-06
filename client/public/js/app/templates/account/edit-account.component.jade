@@ -1,0 +1,22 @@
+div.container
+    div.account-nav
+        ul.nav.nav-tabs
+            li(role='presentation'): a((click)='gotoAccount(api.getUserInfo().id)') Account
+            li.active(role='presentation'): a(routerLink='/edit_account', routerLinkActive='active') Edit Account Info
+
+    h2 You will have to sign in again for these changes to take effect.
+
+    div.alert.alert-danger(*ngIf='error != null')
+        p {{ error }}
+
+    form((ngSubmit)='updateAccount()')
+        h4 First Name:
+        input.form-control(type='text', name='firstName', [(ngModel)]='user.firstName')
+
+        h4 Last Name:
+        input.form-control(type='text', name='lastName', [(ngModel)]='user.lastName')
+
+        h4 Email:
+        input.form-control(type='email', name='email', [(ngModel)]='user.email')
+
+        input.btn.btn-primary(type='submit', value='Update Account Info', style='margin-top: 10px;')

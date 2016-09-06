@@ -11,37 +11,42 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var core_1 = require("@angular/core");
 var api_service_1 = require("../../services/api.service");
 var router_1 = require("@angular/router");
-var SignupComponent = (function () {
-    function SignupComponent(api, router) {
+var EditAccountComponent = (function () {
+    function EditAccountComponent(api, router) {
         this.api = api;
         this.router = router;
     }
-    SignupComponent.prototype.registerUser = function () {
+    EditAccountComponent.prototype.ngOnInit = function () {
+        this.user = this.api.getUserInfo();
+    };
+    EditAccountComponent.prototype.gotoAccount = function (id) {
+        this.router.navigate(['/account', id]);
+    };
+    EditAccountComponent.prototype.updateAccount = function () {
         var _this = this;
         var body = {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-            password: this.password
+            firstName: this.user.firstName,
+            lastName: this.user.lastName,
+            email: this.user.email
         };
-        this.api.post('http://192.168.0.228:3000/api/register', body).then(function (res) {
-            if (res.error) {
-                _this.error = true;
-            }
-            else {
+        this.api.post('http://192.168.0.228:3000/api/user/' + this.user.id + '/update', body).then(function (res) {
+            if (res.error != null)
+                _this.error = res.error;
+            else if (res.error == null) {
+                window.localStorage.removeItem("Token");
                 _this.router.navigate(['/signin']);
             }
         });
     };
-    SignupComponent = __decorate([
+    EditAccountComponent = __decorate([
         core_1.Component({
-            templateUrl: '/js/app/templates/authorization/signup.component.html',
-            styleUrls: ['../../../css/signin.component.css']
+            templateUrl: '/js/app/templates/account/edit-account.component.html',
+            styleUrls: ['../../../css/account.component.css']
         }),
         __param(0, core_1.Inject(api_service_1.ApiService)),
         __param(1, core_1.Inject(router_1.Router))
-    ], SignupComponent);
-    return SignupComponent;
+    ], EditAccountComponent);
+    return EditAccountComponent;
 }());
-exports.SignupComponent = SignupComponent;
-//# sourceMappingURL=signup.component.js.map
+exports.EditAccountComponent = EditAccountComponent;
+//# sourceMappingURL=edit-account.component.js.map

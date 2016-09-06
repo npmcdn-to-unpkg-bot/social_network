@@ -8,10 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 // Imports
-const Router = require('koa-router');
-const api_1 = require("./api");
-const bodyParser = require('koa-bodyparser');
-let router = new Router();
+var Router = require('koa-router');
+var api_1 = require("./api");
+var bodyParser = require('koa-bodyparser');
+var router = new Router();
 /**
  * Function that adds routes to a koa app
  * @param app The koa app to add routes to

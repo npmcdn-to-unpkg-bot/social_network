@@ -11,6 +11,7 @@ import {LoggedinGuard} from "./guards/loggedin.guard";
 import {SignupComponent} from "./components/authorization/signup.component";
 import {AccountComponent} from "./components/account/account.component";
 import {NotificationsComponent} from "./components/account/notifications.component";
+import {EditAccountComponent} from "./components/account/edit-account.component";
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import {NotificationsComponent} from "./components/account/notifications.compone
         SigninComponent,
         SignupComponent,
         AccountComponent,
-        NotificationsComponent
+        NotificationsComponent,
+        EditAccountComponent
     ],
     bootstrap: [
         AppComponent

@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 
 @Component({
     templateUrl: '/js/app/templates/authorization/signin.component.html',
-    styleUrls: ['../../../css/compiled/signin.component.css']
+    styleUrls: ['../../../css/signin.component.css']
 })
 export class SigninComponent {
     private email: string;

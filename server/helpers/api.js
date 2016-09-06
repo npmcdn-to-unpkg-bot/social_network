@@ -7,11 +7,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
-const user_1 = require('../models/user');
-const mongoose = require('mongoose');
-const jwt = require('jwt-simple');
-const crypto = require('crypto');
-const server_1 = require("../server");
+var user_1 = require('../models/user');
+var mongoose = require('mongoose');
+var jwt = require('jwt-simple');
+var crypto = require('crypto');
+var server_1 = require("../server");
 mongoose.connect('mongodb://192.168.0.228:27017/socialnetwork'); // Connecting to mongodb database
 function api(router) {
     router.get('/api/user/:id', function (ctx) {
@@ -21,22 +21,44 @@ function api(router) {
     });
     router.get('/api/user/:id/friends', function (ctx) {
         return __awaiter(this, void 0, void 0, function* () {
-            let user = yield user_1.User.findOne({ _id: ctx.params.id });
-            let friends = [];
-            for (let i = 0; i < user.friends.length; i++) {
+            var user = yield user_1.User.findOne({ _id: ctx.params.id });
+            var friends = [];
+            for (var i = 0; i < user.friends.length; i++) {
                 var friend = yield user_1.User.findOne({ _id: user.friends[i] });
                 friends.push(friend);
             }
             ctx.body = friends;
         });
     });
+    router.post('/api/user/:id/update', function (ctx) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var email = ctx.request.body.email;
+            var firstName = ctx.request.body.firstName;
+            var lastName = ctx.request.body.lastName;
+            var user = yield user_1.User.find({ email: email, _id: { $ne: new mongoose.Types.ObjectId(ctx.params.id) } });
+            if (user.length > 0) {
+                ctx.body = { error: 'A user with that email already exists!' };
+                return;
+            }
+            else {
+                user_1.User.findOne({ _id: ctx.params.id }, function (err, doc) {
+                    doc.firstName = firstName;
+                    doc.lastName = lastName;
+                    doc.email = email;
+                    doc.save();
+                });
+                ctx.body = { succes: true };
+                return;
+            }
+        });
+    });
     router.post('/api/user/addFriend', function (ctx) {
         return __awaiter(this, void 0, void 0, function* () {
-            let userId = ctx.request.body.id;
-            let friendId = ctx.request.body.friend;
-            let user = yield user_1.User.findOne({ _id: userId });
-            let friend = yield user_1.User.findOne({ _id: friendId });
-            let notification = {
+            var userId = ctx.request.body.id;
+            var friendId = ctx.request.body.friend;
+            var user = yield user_1.User.findOne({ _id: userId });
+            var friend = yield user_1.User.findOne({ _id: friendId });
+            var notification = {
                 id: mongoose.Types.ObjectId(),
                 content: user.firstName + ' ' + user.lastName + ' added you as a friend.'
             };
@@ -44,7 +66,7 @@ function api(router) {
                 $push: {
                     friends: friendId
                 }
-            }, (err) => {
+            }, function (err) {
                 if (err)
                     throw err;
             });
@@ -53,11 +75,11 @@ function api(router) {
                     friends: userId,
                     notifications: notification
                 }
-            }, (err) => {
+            }, function (err) {
                 if (err)
                     throw err;
             });
-            let ioData = {
+            var ioData = {
                 notification: notification,
                 id: friend._id
             };
@@ -72,7 +94,7 @@ function api(router) {
                 $pull: {
                     notifications: { id: new mongoose.Types.ObjectId(ctx.params.notification_id) }
                 }
-            }, err => {
+            }, function (err) {
                 if (err)
                     throw err;
             });
@@ -120,7 +142,7 @@ function api(router) {
             var email = ctx.request.body.email;
             var password = ctx.request.body.password;
             var hashedPassword = crypto.createHash('md5').update(password).digest('hex');
-            let user = yield user_1.User.find({ email: email });
+            var user = yield user_1.User.find({ email: email });
             if (!user.length) {
                 var newUser = new user_1.User({
                     firstName: firstName,

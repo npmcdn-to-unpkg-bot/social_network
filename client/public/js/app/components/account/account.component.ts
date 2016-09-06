@@ -4,7 +4,7 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 
 @Component({
     templateUrl: '/js/app/templates/account/account.component.html',
-    styleUrls: ['../../../css/compiled/account.component.css']
+    styleUrls: ['../../../css/account.component.css']
 })
 export class AccountComponent implements OnInit {
     private user;
@@ -30,7 +30,7 @@ export class AccountComponent implements OnInit {
         return this.api.getUserInfo().id == id;
     }
 
-    gotoFriend(id) {
+    gotoAccount(id) {
         this.router.navigate(['/account', id]);
     }
 

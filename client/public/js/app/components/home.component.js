@@ -6,16 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 // Imports
-const core_1 = require("@angular/core");
+var core_1 = require("@angular/core");
 /**
  * Component that will display the home page
  */
-let HomeComponent = class HomeComponent {
-};
-HomeComponent = __decorate([
-    core_1.Component({
-        template: '<h1>Home</h1>'
-    })
-], HomeComponent);
+var HomeComponent = (function () {
+    function HomeComponent() {
+    }
+    HomeComponent = __decorate([
+        core_1.Component({
+            template: '<h1>Home</h1>'
+        })
+    ], HomeComponent);
+    return HomeComponent;
+}());
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

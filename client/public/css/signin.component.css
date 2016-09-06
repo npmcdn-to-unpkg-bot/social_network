@@ -2,8 +2,8 @@
   width: 70%;
   margin: 0 auto;
   text-align: center;
-
-  .btn, input {
-    margin-bottom: 10px;
-  }
+}
+.form .btn,
+.form input {
+  margin-bottom: 10px;
 }

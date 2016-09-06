@@ -1,6 +1,12 @@
 div.container
+    div.account-nav(*ngIf='isMyAccount(user?._id)')
+        ul.nav.nav-tabs
+            li.active(role='presentation'): a((click)='gotoAccount(api.getUserInfo().id)') Account
+            li(role='presentation'): a(routerLink='/edit_account', routerLinkActive='active') Edit Account Info
+
     h1 {{ user?.firstName }}'s Account
     h5(*ngIf='isMyAccount(user?._id)') (Your Account)
+
     div.row
         img.profile-img([src]='user?.image').col-xs-12.col-md-4.col-sm-4
         h4.col-md-7.col-xs-12.col-sm-7 Full Name: {{ user?.firstName + ' ' + user?.lastName }}
@@ -19,5 +25,5 @@ div.container
                 div.friend()
                     img.avatar([src]='friend?.image')
                     div
-                        h4: a((click)='gotoFriend(friend?._id)') {{ friend?.firstName + ' ' + friend?.lastName }}
+                        h4: a((click)='gotoAccount(friend?._id)') {{ friend?.firstName + ' ' + friend?.lastName }}
                         h5 {{ friend?.biography }}

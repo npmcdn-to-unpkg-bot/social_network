@@ -8,24 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-const core_1 = require("@angular/core");
-const router_1 = require("@angular/router");
-let LoggedinGuard = class LoggedinGuard {
-    constructor(router) {
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var LoggedinGuard = (function () {
+    function LoggedinGuard(router) {
         this.router = router;
     }
-    canActivate() {
+    LoggedinGuard.prototype.canActivate = function () {
         if (window.localStorage.getItem("Token"))
             return true;
         else {
             this.router.navigate(['/signin']);
             return false;
         }
-    }
-};
-LoggedinGuard = __decorate([
-    core_1.Injectable(),
-    __param(0, core_1.Inject(router_1.Router))
-], LoggedinGuard);
+    };
+    LoggedinGuard = __decorate([
+        core_1.Injectable(),
+        __param(0, core_1.Inject(router_1.Router))
+    ], LoggedinGuard);
+    return LoggedinGuard;
+}());
 exports.LoggedinGuard = LoggedinGuard;
 //# sourceMappingURL=loggedin.guard.js.map
