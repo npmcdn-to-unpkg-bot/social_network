@@ -1,8 +1,5 @@
 div.container
-    div.account-nav
-        ul.nav.nav-tabs
-            li(role='presentation'): a((click)='gotoAccount(api.getUserInfo().id)') Account
-            li.active(role='presentation'): a(routerLink='/edit_account', routerLinkActive='active') Edit Account Info
+    account-tabs([user]='user', [active]='2')
 
     h2 You will have to sign in again for these changes to take effect.
 

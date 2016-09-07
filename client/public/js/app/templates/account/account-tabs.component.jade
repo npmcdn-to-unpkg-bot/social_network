@@ -1,0 +1,5 @@
+div.account-nav
+    ul.nav.nav-tabs
+        li(role='presentation', [class.active]='active === 1'): a((click)='gotoAccount(api.getUserInfo().id)') Account
+        li(role='presentation', [class.active]='active === 2'): a(
+            routerLink='/edit_account', routerLinkActive='active') Edit Account Info

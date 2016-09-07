@@ -33,7 +33,7 @@ var AccountComponent = (function () {
     AccountComponent.prototype.isMyAccount = function (id) {
         return this.api.getUserInfo().id == id;
     };
-    AccountComponent.prototype.gotoAccount = function (id) {
+    AccountComponent.prototype.gotoAccoun = function (id) {
         this.router.navigate(['/account', id]);
     };
     AccountComponent.prototype.addFriend = function (id) {

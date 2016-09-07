@@ -12,9 +12,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var core_1 = require("@angular/core");
 var api_service_1 = require("../services/api.service");
 var router_1 = require("@angular/router");
-/**
- * Component that will contain the header with all the links.
- */
 var AppComponent = (function () {
     function AppComponent(api, router) {
         this.api = api;

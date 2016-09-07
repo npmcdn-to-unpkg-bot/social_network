@@ -1,8 +1,5 @@
 div.container
-    div.account-nav(*ngIf='isMyAccount(user?._id)')
-        ul.nav.nav-tabs
-            li.active(role='presentation'): a((click)='gotoAccount(api.getUserInfo().id)') Account
-            li(role='presentation'): a(routerLink='/edit_account', routerLinkActive='active') Edit Account Info
+    account-tabs([user]='user', [active]='1', *ngIf='isMyAccount(user?._id)'  )
 
     h1 {{ user?.firstName }}'s Account
     h5(*ngIf='isMyAccount(user?._id)') (Your Account)

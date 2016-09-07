@@ -13,6 +13,7 @@ import {AccountComponent} from "./components/account/account.component";
 import {NotificationsComponent} from "./components/account/notifications.component";
 import {EditAccountComponent} from "./components/account/edit-account.component";
 import {ShowSearchResultComponent} from "./components/search/show-search-result.component";
+import {AccountTabsComponent} from "./components/account/account-tabs.component";
 
 @NgModule({
     imports: [
@@ -33,7 +34,8 @@ import {ShowSearchResultComponent} from "./components/search/show-search-result.
         AccountComponent,
         NotificationsComponent,
         EditAccountComponent,
-        ShowSearchResultComponent
+        ShowSearchResultComponent,
+        AccountTabsComponent
     ],
     bootstrap: [
         AppComponent

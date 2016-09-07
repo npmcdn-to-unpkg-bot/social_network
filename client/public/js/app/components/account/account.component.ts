@@ -30,7 +30,7 @@ export class AccountComponent implements OnInit {
         return this.api.getUserInfo().id == id;
     }
 
-    gotoAccount(id) {
+    gotoAccoun(id) {
         this.router.navigate(['/account', id]);
     }
 
